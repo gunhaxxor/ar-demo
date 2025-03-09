@@ -14,6 +14,7 @@ export default defineConfig({
         target: 'http://localhost:3333',
         changeOrigin: true,
         secure: false,
+        rewrite: (path) => path.replace(/^\/backend/, ''),
         configure: (proxy, _options) => {
           proxy.on('error', (err, _req, _res) => {
             console.log('proxy error', err);

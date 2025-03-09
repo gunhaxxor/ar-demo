@@ -5,7 +5,7 @@ import { computed, onMounted, reactive, watch } from 'vue';
 import { useIntervalFn } from '@vueuse/core';
 import TheWelcome from '../components/TheWelcome.vue'
 
-const client = hc<AppType>(`http://localhost:5173/api`)
+const client = hc<AppType>(`/backend`)
 const apiData = reactive({
   valueA: 0,
   valueB: 0
