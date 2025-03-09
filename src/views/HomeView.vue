@@ -5,7 +5,7 @@ import { computed, onMounted, reactive, watch } from 'vue';
 import { useIntervalFn } from '@vueuse/core';
 import TheWelcome from '../components/TheWelcome.vue'
 
-const client = hc<AppType>('http://localhost:3333')
+const client = hc<AppType>(`http://localhost:5173/api`)
 const apiData = reactive({
   valueA: 0,
   valueB: 0
@@ -16,7 +16,7 @@ const boxPos = computed(() => {
   return newPos;
 })
 watch(apiData, () => {
-  client.api.$post({
+  client.index.$post({
     json: {
       valueA: apiData.valueA,
       valueB: apiData.valueB
@@ -24,11 +24,11 @@ watch(apiData, () => {
   })
 })
 useIntervalFn(async () => {
-  const response = await client.api.$get();
+  const response = await client.index.$get();
   const data = await response.json();
   apiData.valueA = data.valueA;
   apiData.valueB = data.valueB;
-}, 20)
+}, 400)
 onMounted(async () => {
 })
 </script>

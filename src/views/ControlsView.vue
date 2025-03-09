@@ -14,13 +14,13 @@
 import { hc } from 'hono/client';
 import type { AppType } from '@/api';
 import { onMounted, reactive, watch } from 'vue';
-const client = hc<AppType>('http://localhost:3333')
+const client = hc<AppType>('/backend')
 const apiData = reactive({
   valueA: 0,
   valueB: 0
 })
 watch(apiData, () => {
-  client.api.$post({
+  client.index.$post({
     json: {
       valueA: apiData.valueA,
       valueB: apiData.valueB
@@ -28,7 +28,7 @@ watch(apiData, () => {
   })
 })
 onMounted(async () => {
-  const response = await client.api.$get();
+  const response = await client.index.$get();
   const data = await response.json();
   apiData.valueA = data.valueA;
   apiData.valueB = data.valueB;

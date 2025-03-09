@@ -13,7 +13,7 @@ app.use(cors({
 }));
 
 
-const routes = app.post("/api",
+const routes = app.post("/",
   zValidator(
     'json', 
     z.object({
@@ -23,6 +23,7 @@ const routes = app.post("/api",
   ),
   (c) => {
     const validated = c.req.valid('json');
+    console.log(validated);
     valueA = validated.valueA;
     valueB = validated.valueB;
 
@@ -31,7 +32,7 @@ const routes = app.post("/api",
       valueB,
     });
   }
-).get("/api", (c) => {
+).get("/", (c) => {
   return c.json({
     valueA,
     valueB,
