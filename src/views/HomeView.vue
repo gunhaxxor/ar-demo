@@ -28,7 +28,7 @@ useIntervalFn(async () => {
   const data = await response.json();
   apiData.valueA = data.valueA;
   apiData.valueB = data.valueB;
-}, 400)
+}, 20)
 onMounted(async () => {
 })
 </script>
